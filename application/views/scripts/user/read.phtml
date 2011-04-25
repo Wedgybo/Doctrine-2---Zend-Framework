@@ -1,0 +1,14 @@
+<?php 
+foreach ($this->users as $user) {
+	echo $user->getName();
+	echo $user->getAddress()->getCity();
+	echo $user->getAddress()->getPostcode();
+} 
+
+foreach ($this->managers as $manager) {
+	echo $manager->getName();
+} 
+
+foreach ($this->oldies as $oldie) {
+	echo $oldie->getName();
+} 
