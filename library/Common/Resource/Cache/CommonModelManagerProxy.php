@@ -29,10 +29,16 @@ class CommonModelManagerProxy extends \Common\Model\Manager implements \Doctrine
     }
 
     
-    public function addProject(\Common\Model\Project $project)
+    public function getProjects()
     {
         $this->__load();
-        return parent::addProject($project);
+        return parent::getProjects();
+    }
+
+    public function setProjects($projects)
+    {
+        $this->__load();
+        return parent::setProjects($projects);
     }
 
     public function getId()
@@ -81,6 +87,24 @@ class CommonModelManagerProxy extends \Common\Model\Manager implements \Doctrine
     {
         $this->__load();
         return parent::setAddress($address);
+    }
+
+    public function setProperties(array $properties)
+    {
+        $this->__load();
+        return parent::setProperties($properties);
+    }
+
+    public function __get($name)
+    {
+        $this->__load();
+        return parent::__get($name);
+    }
+
+    public function __set($name, $value)
+    {
+        $this->__load();
+        return parent::__set($name, $value);
     }
 
 

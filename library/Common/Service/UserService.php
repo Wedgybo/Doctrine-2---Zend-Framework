@@ -13,11 +13,11 @@ class UserService extends AbstractService {
 	{
 		$employee = new Employee();
 		$employee->setProperties($data);
+		
 		if(!is_null($data['manager'])) {
 			$employee->setManager($this->getManager($data['manager']));
 		}
-		
-		//var_dump($employee);exit;
+
 		$this->_dm->persist($employee);
 		$this->_dm->flush();
 	}
@@ -26,22 +26,44 @@ class UserService extends AbstractService {
 	{
 		$manager = new Manager();
 		$manager->setProperties($data);
-		if(!is_null($data['project'])) {
-			$manager->setProject($this->getProject($data['project']));
-		}
 		
-		//var_dump($employee);exit;
+		$projects = array();
+		$projectService = new ProjectService();
+		
+		if(is_array($data['projects'])) {
+			foreach ($data['projects'] as $projectId) {
+				$projects[] = $projectService->getProject($projectId);
+			}
+			$manager->setProjects($projects);
+		}
+
 		$this->_dm->persist($manager);
 		$this->_dm->flush();
 	}
 	
-	public function getManager($id) 
+	public function getUser($id) 
 	{
-		return $this->_dm->getRepository('Common\Model\Manager')->find(array('id' => $id));
+		return $this->_dm->find('Common\Model\User', $id);
 	}
 	
-	public function getAllEmployees() {
+	public function getAllUsers() 
+	{
+		return $this->_dm->getRepository('Common\Model\User')->findAll();
+	}
+
+	public function getEmployee($id) 
+	{
+		return $this->_dm->find('Common\Model\Employee', $id);
+	}
+	
+	public function getAllEmployees() 
+	{
 		return $this->_dm->getRepository('Common\Model\Employee')->findAll();
+	}
+	
+	public function getManager($id) 
+	{
+		return $this->_dm->find('Common\Model\Manager', $id);
 	}
 	
 	public function getAllManagers() {
@@ -59,8 +81,5 @@ class UserService extends AbstractService {
 	
 	public function getAllUsersOver($age) {
 		return $this->_dm->getRepository('Common\Model\User')->findAllUsersOlderThan($age);
-	}
-	public function getUser($id) {
-		
 	}
 }

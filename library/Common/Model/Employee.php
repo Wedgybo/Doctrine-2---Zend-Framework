@@ -10,7 +10,6 @@ class Employee extends User
 
 	
 	public function setManager($manager) {
-		//var_dump($manager);exit;
 		if (is_array($manager)) {
 			$manager = new Manager($manager);
 		}

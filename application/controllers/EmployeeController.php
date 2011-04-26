@@ -43,7 +43,14 @@ class EmployeeController extends Zend_Controller_Action
     
     public function readAction()
     {
-    	
+    	$params = $this->getRequest()->getParams();
+    	$service = new UserService();
+
+    	if (empty($params['id'])) {
+    		$this->view->employees = $service->getAllEmployees();
+    	} else {
+    		$this->view->employee = $service->getUser($params['id']);
+    	}
     }
 
     public function updateAction()

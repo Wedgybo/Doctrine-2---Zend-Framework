@@ -1,0 +1,6 @@
+<?php
+
+echo $this->partial('user/user.phtml', $this->object);
+echo "<h3>Manages Project</h3>";
+echo $this->partialLoop('project/project.phtml', $this->object->getProjects());
+echo "<br>";

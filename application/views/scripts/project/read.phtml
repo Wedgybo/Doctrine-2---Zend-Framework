@@ -1,4 +1,10 @@
 <?php 
-foreach ($this->projects as $project) {
-	echo $project->getName()."<br>";
-} 
+
+echo "<h2>Projects</h2>";
+if (isset($this->projects)) {
+	echo "<ul>" . $this->partialLoop('project/project.phtml', $this->projects) . "</ul>";
+} elseif (isset($this->project)) {
+	echo "<ul>" . $this->partial('project/project.phtml', $this->project) . "</ul>";
+} else {
+	echo "<h3>No project data to display</h3>";
+}

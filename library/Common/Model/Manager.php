@@ -7,10 +7,20 @@ class Manager extends User
 {
 	/** @ReferenceMany(targetDocument="Project") */
 	private $projects = array();
+	/**
+	 * @return the $projects
+	 */
+	public function getProjects() {
+		return $this->projects;
+	}
 
-	public function addProject(Project $project) 
-	{
-		$this->projects[] = $project;
+	/**
+	 * @param field_type $projects
+	 */
+	public function setProjects($projects) {
+		$this->projects = $projects;
 		return $this;
 	}
+
+
 }

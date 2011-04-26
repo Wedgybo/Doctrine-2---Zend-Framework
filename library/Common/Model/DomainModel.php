@@ -52,7 +52,7 @@ abstract class DomainModel
 		if (method_exists($this, $method)) {
 			return $this->$method();
 		} else {
-			throw new Exception(self::INVALID_PROPERTY);
+			throw new \Exception(self::INVALID_PROPERTY);
 		}
 	}
 	
@@ -69,7 +69,7 @@ abstract class DomainModel
 		if(method_exists($this, $method)) {
 			return $this->$method($value);
 		} else {
-			throw new Exception(self::INVALID_PROPERTY);
+			throw new \Exception(self::INVALID_PROPERTY);
 		}
 	}
 }

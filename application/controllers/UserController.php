@@ -26,13 +26,11 @@ class UserController extends Zend_Controller_Action
     {
     	$params = $this->getRequest()->getParams();
     	$service = new UserService();
-    	//var_dump($params);exit;
+
     	if (empty($params['id'])) {
-    		$this->view->users = $service->getAllEmployees();
-    		$this->view->managers = $service->getAllManagers();
-    		$this->view->oldies = $service->getAllUsersOver(23);
+    		$this->view->users = $service->getAllUsers();
     	} else {
-    		$user = $service->getUser($params['id']);
+    		$this->view->user = $service->getUser($params['id']);
     	}
     }
 

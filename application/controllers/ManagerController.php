@@ -23,14 +23,9 @@ class ManagerController extends Zend_Controller_Action
     	$form = new Common_Form_Manager();
     	$projects = $projectService->getAllProjectsNames();
     	$form->projects->addMultiOptions($projects);
-    	$this->view->form = $form;
     	
     	$request = $this->getRequest();
-    	
-    	$projectService = new ProjectService();
-	    $form = new Common_Form_Manager();
-	    $projects = $projectService->getAllProjectsNames();
-    	$form->projects->addMultiOptions($projects);
+
     	// Request is not a post, setup the view form.
     	if (!$request->isPost()) {
 	    	$this->view->form = $form;
@@ -48,7 +43,14 @@ class ManagerController extends Zend_Controller_Action
     
     public function readAction()
     {
-    	
+    	$params = $this->getRequest()->getParams();
+    	$service = new UserService();
+
+    	if (empty($params['id'])) {
+    		$this->view->managers = $service->getAllManagers();
+    	} else {
+    		$this->view->manager = $service->getUser($params['id']);
+    	}
     }
 
     public function updateAction()

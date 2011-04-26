@@ -1,17 +1,10 @@
 <?php 
-foreach ($this->users as $user) {
-	echo $user->getName();
-	echo $user->getAddress()->getCity();
-	echo $user->getAddress()->getPostcode();
-} 
 
-foreach ($this->managers as $manager) {
-	echo $manager->getName();
-} 
-
-foreach ($this->oldies as $oldie) {
-	echo $oldie->getName();
-} 
-?>
-
-<br /><br /><center>View script for controller <b>User</b> and script/action name <b>index</b></center>
+echo "<h2>Employees</h2>";
+if (isset($this->employees)) {
+	echo "<dl>" . $this->partialLoop('user/list.phtml', $this->employees) . "</dl>";
+} elseif (isset($this->employee)) {
+	echo "<dl>" . $this->partial('employee/employee.phtml', $this->employee) . "</dl>";
+} else { 
+	echo "<h3>No employee data to display</h3>";
+}

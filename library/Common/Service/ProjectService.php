@@ -6,6 +6,11 @@ use Common\Model\Project;
 
 class ProjectService extends AbstractService {
 	
+	public function getProject($id) 
+	{
+		return $this->_dm->find('Common\Model\Project', $id);
+	}
+	
 	public function getAllProjects() {
 		return $this->_dm->getRepository('Common\Model\Project')->findAll();
 	}

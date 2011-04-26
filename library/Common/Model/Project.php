@@ -3,7 +3,7 @@
 namespace Common\Model;
 
 /** 
- * 	@Document(collection="projects", repositoryClass="Common\Repository\ProjectRepository")
+ * 	@Document(collection="projects")
  */
 class Project extends DomainModel 
 {
@@ -14,9 +14,11 @@ class Project extends DomainModel
 	/** @String */
 	private $name;
 	
-	public function __construct($name)
+	public function __construct($data = array())
 	{
-		$this->name = $name;
+		if (is_array($data)) {
+			$this->setProperties($data);
+		} 
 	}
 	/**
 	 * @return the $id
